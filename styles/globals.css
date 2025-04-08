@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,54 +7,55 @@
 
 html,
 body {
-  background-color: #E5E5E5;
+  background-color: #EFEFEF;
 }
+
 
 @layer base {
   html {
-    font-family: "Host Grotesk", sans-serif;
+    font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
   }
 }
 
 @layer components {
-  .host-light {
-    font-family: "Host Grotesk", sans-serif;
+  .jost-light {
+    font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
   }
 
-  .host-regular {
-    font-family: "Host Grotesk", sans-serif;
+  .jost-regular {
+    font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
   }
 
-  .host-medium {
-    font-family: "Host Grotesk", sans-serif;
+  .jost-medium {
+    font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
   }
 
-  .host-semibold {
-    font-family: "Host Grotesk", sans-serif;
+  .jost-semibold {
+    font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
   }
 
-  .host-bold {
-    font-family: "Host Grotesk", sans-serif;
+  .jost-bold {
+    font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
   }
 
-  .host-extrabold {
-    font-family: "Host Grotesk", sans-serif;
+  .jost-extrabold {
+    font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
@@ -210,4 +212,17 @@ body {
 
 .gradient-transition:hover {
   animation: gradient-fade 3s forwards;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 50s linear infinite;
 }
