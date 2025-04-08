@@ -191,13 +191,13 @@ body {
 
 /* Custom text selection styling */
 ::selection {
-  background-color: #2376dc; /* Tailwind blue-400 */
+  background-color: #1A2732; /* Tailwind blue-400 */
   color: white; /* Optional: change the text color when selected */
 }
 
 /* For Firefox */
 ::-moz-selection {
-  background-color: #2376dc; /* Tailwind blue-400 */
+  background-color: #1A2732; /* Tailwind blue-400 */
   color: white; /* Optional: change the text color when selected */
 }
 
