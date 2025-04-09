@@ -3,8 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logo from "../assets/logoColor.png";
-
+import { useRouter } from "next/router";
 export default function Navbar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -98,7 +99,10 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <button className="hidden lg:block bg-transparent text-mainBlue w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:text-mainBlue hover:bg-mainBlue/10 transition-all duration-500">
+          <button
+            onClick={() => router.push("/application/login")}
+            className="hidden lg:block bg-transparent text-mainBlue w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:text-mainBlue hover:bg-mainBlue/10 transition-all duration-500"
+          >
             Sign In
           </button>
           <button className="hidden lg:block bg-mainBlue text-white w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:bg-mainYellow hover:text-mainBlue hover:border-mainYellow transition-all duration-500">

@@ -1,8 +1,11 @@
 import { BsWindowDesktop } from "react-icons/bs";
 import HeroImage from "../../assets/dashboardHero.png";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Hero() {
+  const router = useRouter();
+
   return (
     <div className="w-full h-max lg:pt-52 pt-40 pb-10 lg:pb-20 px-10 lg:px-20 flex flex-col items-center justify-center bg-mainBG fade-in-down relative">
       <div className="flex flex-col items-center justify-center border border-borderGray rounded-full px-6 py-1.5 bg-white mb-5 lg:mb-8">
@@ -10,7 +13,7 @@ export default function Hero() {
           Trusted by leaders. Loved by teams.
         </p>
       </div>
-      <h1 className="text-3xl md:text-6xl lg:text-[5rem] leading-[2.5rem] md:leading-[4rem] lg:leading-[5rem] text-center jost-medium">
+      <h1 className="text-4xl md:text-6xl lg:text-[5rem] leading-[2.5rem] md:leading-[4rem] lg:leading-[5rem] text-center jost-medium">
         Transform <span className="text-mainYellow ">employee well-being</span>{" "}
         <br className="hidden md:block" /> into your company's superpower.
       </h1>
@@ -19,11 +22,14 @@ export default function Hero() {
       </p>
 
       <div className="flex flex-row items-center justify-center mt-10 lg:mt-16 gap-4">
-        <button className="bg-mainBlue border hover:bg-mainYellow hover:text-mainBlue hover:border-mainYellow transition-all duration-500 border-mainBlue text-white px-6 py-2 rounded-lg lg:rounded-xl text-xs lg:text-base jost-medium flex items-center gap-2 flex-row ">
+        <button className="bg-mainBlue border hover:bg-mainYellow hover:text-mainBlue hover:border-mainYellow transition-all duration-500 border-mainBlue text-white px-4 lg:px-6 py-2 rounded-lg lg:rounded-xl text-xs lg:text-base jost-medium flex items-center gap-2 flex-row ">
           <BsWindowDesktop className="w-4 h-4" />
           Try for Free
         </button>
-        <button className="bg-white border border-borderGray hover:bg-mainBlue/10 transition-all duration-500 hover:border-mainBlue/10 text-mainBlue px-6 py-2 rounded-lg lg:rounded-xl text-xs lg:text-base jost-medium">
+        <button
+          onClick={() => router.push("/application/login")}
+          className="bg-white border border-borderGray hover:bg-mainBlue/10 transition-all duration-500 hover:border-mainBlue/10 text-mainBlue px-4 lg:px-6 py-2 rounded-lg lg:rounded-xl text-xs lg:text-base jost-medium"
+        >
           View Your Dashboard
         </button>
       </div>
