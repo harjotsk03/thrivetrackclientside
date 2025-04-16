@@ -4,17 +4,26 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logo from "../assets/logoColor.png";
 import { useRouter } from "next/router";
+import { FiArrowRight } from "react-icons/fi";
+
 export default function Navbar() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 200;
@@ -98,19 +107,32 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => router.push("/application/login")}
-            className="hidden lg:block bg-transparent text-mainBlue w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:text-mainBlue hover:bg-mainBlue/10 transition-all duration-500"
-          >
-            Sign In
-          </button>
-          <button className="hidden lg:block bg-mainBlue text-white w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:bg-mainYellow hover:text-mainBlue hover:border-mainYellow transition-all duration-500">
-            Try for Free
-          </button>
-        </div>
-
-        {/* Hamburger Menu Button */}
+        {isLoggedIn ? (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => router.push("/application/dashboard")}
+              className="hidden group lg:flex items-center gap-2 flex-row bg-white text-mainBlue border border-borderGray w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:text-white hover:bg-mainBlue hover:border-mainBlue transition-all duration-500"
+            >
+              View Your Dashboard{" "}
+              <FiArrowRight className="group-hover:translate-x-1 transition-all duration-500" />
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => router.push("/application/login")}
+              className="hidden lg:block bg-transparent text-mainBlue w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:text-mainBlue hover:bg-mainBlue/10 transition-all duration-500"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => router.push("/application/register")}
+              className="hidden lg:block bg-mainBlue text-white w-max whitespace-nowrap px-6 jost-medium tracking-wide text-sm py-2 rounded-xl hover:bg-mainYellow hover:text-mainBlue hover:border-mainYellow transition-all duration-500"
+            >
+              Try for Free
+            </button>
+          </div>
+        )}
         <button
           className="lg:hidden ml-auto flex items-center justify-center"
           onClick={toggleMenu}

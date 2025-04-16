@@ -8,6 +8,9 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    domains: ["studyspotr.s3.us-east-2.amazonaws.com"],
+  },
 };
 
 module.exports = nextConfig;
