@@ -1,16 +1,34 @@
 import AuthLayout from "../../../components/AuthLayout";
 import { useRouter } from "next/router";
 import { FaArrowLeft } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import SurveyInfo from "../../../components/surveys/creating/SurveyInfo";
 import SurveyQuestions from "../../../components/surveys/creating/SurveyQuestions";
 import Dragables from "../../../components/surveys/creating/dragables";
+import SurveyData from "../../../components/surveys/creating/SurveyData";
+import { AlertContext } from "../../../context/alertContext";
+import { useEffect } from "react";
 
 export default function CreatingSurvey() {
   const router = useRouter();
+  const { showAlert } = useContext(AlertContext);
 
   const [isSurveyInfoEnabled, setIsSurveyInfoEnabled] = useState(false);
   const [surveyTitle, setSurveyTitle] = useState("");
+  const [questions, setQuestions] = useState([]);
+
+  const [isDataFilled, setIsDataFilled] = useState(false);
+
+  const beginAddingQuestions = () => {
+    if (isDataFilled) {
+      setIsSurveyInfoEnabled(true);
+    } else {
+      setIsSurveyInfoEnabled(false);
+      showAlert(
+        "Please fill in the survey information before adding questions"
+      );
+    }
+  };
 
   return (
     <AuthLayout>
@@ -30,8 +48,8 @@ export default function CreatingSurvey() {
             <div className="flex flex-col gap-2 overflow-y-auto scrollbar-hide h-[80vh] px-1">
               {!isSurveyInfoEnabled && (
                 <SurveyInfo
-                  surveyTitle={surveyTitle}
-                  setSurveyTitle={setSurveyTitle}
+                  setIsDataFilled={setIsDataFilled}
+                  isDataFilled={isDataFilled}
                 />
               )}
               {!isSurveyInfoEnabled && (
@@ -44,8 +62,8 @@ export default function CreatingSurvey() {
                     Save Draft
                   </button>
                   <button
-                    onClick={() => setIsSurveyInfoEnabled(!isSurveyInfoEnabled)}
-                    className="w-max px-4 py-2 text-sm rounded-lg bg-mainBlue text-white hover:bg-mainBlue/10 hover:text-mainBlue transition-all duration-500 ease-in-out"
+                    onClick={beginAddingQuestions}
+                    className="w-max px-4 py-2 text-sm rounded-lg bg-mainBlue text-white hover:bg-mainYellow hover:text-mainBlue transition-all duration-500 ease-in-out"
                   >
                     Begin Adding Questions
                   </button>
@@ -56,12 +74,28 @@ export default function CreatingSurvey() {
                   isSurveyInfoEnabled={isSurveyInfoEnabled}
                   setIsSurveyInfoEnabled={setIsSurveyInfoEnabled}
                   surveyTitle={surveyTitle}
+                  questions={questions}
+                  setQuestions={setQuestions}
                 />
               )}
             </div>
           </div>
           <div className="flex w-2/5 flex-col gap-4 mt-4 bg-white/60 rounded-2xl h-[calc(80vh)] p-6">
             <Dragables surveyTitle={surveyTitle} />
+            <SurveyData questions={questions} />
+            <div className="flex flex-row gap-2 w-full justify-end">
+              <div className="flex flex-row gap-4 items-center">
+                <p className="text-xs text-mainBlue/40 poppins-regular">
+                  Last saved: 16/04/2025, 12:03 PM
+                </p>
+                <button className="w-max px-4 py-2 text-sm rounded-lg hover:bg-mainBlue hover:text-white bg-mainBlue/10 text-mainBlue transition-all duration-500 ease-in-out">
+                  Save Draft
+                </button>
+              </div>
+              <button className="w-max px-4 py-2 text-sm rounded-lg bg-mainBlue text-white hover:bg-mainYellow hover:text-mainBlue transition-all duration-500 ease-in-out">
+                Publish
+              </button>
+            </div>
           </div>
         </div>
       </div>

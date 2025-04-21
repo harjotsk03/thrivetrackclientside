@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { TbBoxMultiple, TbBoxMultiple2 } from "react-icons/tb";
 import { MdTextSnippet } from "react-icons/md";
 import { AlertContext } from "../../../context/alertContext";
-// Remove react-draggable as we'll use only HTML5 drag-and-drop
-// import Draggable from "react-draggable";
 
 export default function Dragables({ surveyTitle }) {
   const { showAlert } = useContext(AlertContext);
@@ -11,7 +9,6 @@ export default function Dragables({ surveyTitle }) {
   const handleDragStart = (e, questionType) => {
     if (surveyTitle === "" || surveyTitle === null) {
       showAlert("Please enter a survey title before adding questions");
-      // Optionally prevent drag if title is empty
       e.preventDefault();
       return;
     }
@@ -22,14 +19,14 @@ export default function Dragables({ surveyTitle }) {
 
   return (
     <>
-      <h3 className="text-lg poppins-medium mb-1">Question Types</h3>
-      <p className="text-sm poppins-regular mb-4">
+      <h3 className="text-lg poppins-medium">Question Types</h3>
+      <p className="text-sm poppins-regular">
         Drag and drop the question type to the survey builder to add it to your
         survey
       </p>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-4">
         <div
-          className="box bg-white rounded-lg p-4 text-center mb-4 shadow cursor-move flex flex-col items-center justify-center gap-3"
+          className="box bg-white rounded-2xl p-4 text-center mb-4 shadow cursor-move flex flex-col items-center justify-center gap-3"
           onDragStart={(e) => handleDragStart(e, "multipleChoice")}
           draggable="true"
         >
@@ -37,7 +34,7 @@ export default function Dragables({ surveyTitle }) {
           Multiple Choice Question
         </div>
         <div
-          className="box bg-white rounded-lg p-4 text-center mb-4 shadow cursor-move flex flex-col items-center justify-center gap-3"
+          className="box bg-white rounded-2xl p-4 text-center mb-4 shadow cursor-move flex flex-col items-center justify-center gap-3"
           onDragStart={(e) => handleDragStart(e, "shortAnswer")}
           draggable="true"
         >
@@ -45,7 +42,7 @@ export default function Dragables({ surveyTitle }) {
           Short Answer Question
         </div>
         <div
-          className="box bg-white rounded-lg p-4 text-center mb-4 shadow cursor-move flex flex-col items-center justify-center gap-3"
+          className="box bg-white rounded-2xl p-4 text-center mb-4 shadow cursor-move flex flex-col items-center justify-center gap-3"
           onDragStart={(e) => handleDragStart(e, "selectMultiple")}
           draggable="true"
         >

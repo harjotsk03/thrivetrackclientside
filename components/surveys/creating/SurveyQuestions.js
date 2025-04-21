@@ -4,14 +4,15 @@ import { RiDragDropLine } from "react-icons/ri";
 import MultipleChoiceQuestion from "./MultipleChoiceQuestion";
 import ShortAnswerQuestion from "./ShortAnswerQuestion";
 import SelectMultipleQuestion from "./SelectMultipleQuestion";
+import MultiSelectQuestion from "./MultiSelectQuestion";
 
 export default function SurveyQuestions({
   setIsSurveyInfoEnabled,
   isSurveyInfoEnabled,
   surveyTitle,
+  questions,
+  setQuestions,
 }) {
-  const [questions, setQuestions] = useState([]);
-
   const handleDrop = (e) => {
     e.preventDefault();
     const questionType = e.dataTransfer.getData("questionType");
@@ -22,13 +23,13 @@ export default function SurveyQuestions({
       newQuestion = {
         type: "multipleChoice",
         question: "New Multiple Choice Question",
-        options: ["Option 1", "Option 2", "Option 3"],
+        options: ["", "", "", ""],
+        correctAnswer: null,
       };
     } else if (questionType === "shortAnswer") {
       newQuestion = {
         type: "shortAnswer",
         question: "New Short Answer Question",
-        options: [],
       };
     } else if (questionType === "selectMultiple") {
       newQuestion = {
@@ -67,14 +68,24 @@ export default function SurveyQuestions({
             key={index}
             question={question}
             index={index}
+            setQuestions={setQuestions}
+            questions={questions}
           />
         ) : question.type === "shortAnswer" ? (
-          <ShortAnswerQuestion key={index} question={question} index={index} />
-        ) : question.type === "selectMultiple" ? (
-          <SelectMultipleQuestion
+          <ShortAnswerQuestion
             key={index}
             question={question}
             index={index}
+            setQuestions={setQuestions}
+            questions={questions}
+          />
+        ) : question.type === "selectMultiple" ? (
+          <MultiSelectQuestion
+            key={index}
+            question={question}
+            index={index}
+            setQuestions={setQuestions}
+            questions={questions}
           />
         ) : null
       )}

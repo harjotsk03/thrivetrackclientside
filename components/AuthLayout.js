@@ -16,10 +16,6 @@ export default function AuthLayout({ children }) {
     return <div>No profile found</div>;
   }
 
-  if (profile) {
-    console.log(profile);
-  }
-
   return (
     <div className="flex">
       <AuthNav />

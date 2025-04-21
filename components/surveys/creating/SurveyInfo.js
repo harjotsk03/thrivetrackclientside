@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RiCheckLine, RiCloseLine } from "react-icons/ri";
 import LabelText from "./text/labelText";
 import AddTagsInput from "./addTagsInput";
 
-export default function SurveyInfo({ surveyTitle, setSurveyTitle }) {
+export default function SurveyInfo({ isDataFilled, setIsDataFilled }) {
+  const [surveyTitle, setSurveyTitle] = useState("");
+  const [surveyDescription, setSurveyDescription] = useState("");
   const [selectedTeams, setSelectedTeams] = useState([]);
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
@@ -45,14 +47,40 @@ export default function SurveyInfo({ surveyTitle, setSurveyTitle }) {
   const handleRemoveTeam = (team) => {
     setSelectedTeams(selectedTeams.filter((t) => t !== team));
   };
+
+  const checkIfDataFilled = () => {
+    console.log(
+      surveyTitle,
+      surveyDescription,
+      selectedTeams.length,
+      tags.length
+    );
+    if (
+      surveyTitle !== "" &&
+      surveyDescription !== "" &&
+      selectedTeams.length > 0 &&
+      tags.length > 0
+    ) {
+      setIsDataFilled(true);
+    } else {
+      setIsDataFilled(false);
+    }
+  };
+
+  useEffect(() => {
+    checkIfDataFilled();
+  }, [surveyTitle, surveyDescription, selectedTeams, tags]);
+
   return (
     <div className="fade-in-down w-full flex flex-col">
-      <LabelText forLabel="surveyTitle" label="Survey Title" />
+      <LabelText forLabel="surveyTitle" label="Survey Title" required />
       <input
         id="surveyTitle"
         placeholder="e.g. Employee Engagement Survey"
         value={surveyTitle}
-        onChange={(e) => setSurveyTitle(e.target.value)}
+        onChange={(e) => {
+          setSurveyTitle(e.target.value);
+        }}
         type="text"
         className="mt-2 min-h-10 rounded-lg border border-mainBlue/20 px-2 focus:outline-none focus:ring-2 focus:ring-mainBlue transition-all duration-500 ease-in-out"
       />
@@ -60,15 +88,24 @@ export default function SurveyInfo({ surveyTitle, setSurveyTitle }) {
         forLabel="surveyDescription"
         label="Survey Description"
         className="mt-4"
+        required
       />
       <textarea
         type="text"
         placeholder="e.g. This survey is designed to gather feedback from employees about their work experience and overall satisfaction."
         id="surveyDescription"
         className="min-h-24 mt-2 py-2 rounded-lg border border-mainBlue/20 px-2 focus:outline-none focus:ring-2 focus:ring-mainBlue transition-all duration-500 ease-in-out"
+        onChange={(e) => {
+          setSurveyDescription(e.target.value);
+        }}
       />
       <div className="flex flex-col gap-2">
-        <LabelText forLabel="surveyTags" label="Tags" className="mt-4" />
+        <LabelText
+          forLabel="surveyTags"
+          label="Tags"
+          className="mt-4"
+          required
+        />
         <AddTagsInput
           tags={tags}
           setTags={setTags}
@@ -82,6 +119,7 @@ export default function SurveyInfo({ surveyTitle, setSurveyTitle }) {
               className="mt-2"
               forLabel="surveyTeam"
               label="Select Team(s)/Departments to send to"
+              required
             />
             <div className="flex flex-row gap-3 items-center">
               <button
