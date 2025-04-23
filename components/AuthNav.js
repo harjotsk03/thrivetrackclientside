@@ -74,9 +74,11 @@ export default function AuthNav() {
         lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}
       `}
       >
-        <Image src={logo} className="w-16 lg:w-28 h-auto" />
-        <div className="flex flex-col justify-between h-full pt-14 pb-8">
+        <div className="flex flex-col justify-between h-full lg:pt-14 pb-8">
           <div className="flex flex-col gap-4">
+            <div className="relative w-20 lg:mb-4 lg:w-24 h-10">
+              <Image src={logo} alt="Logo" fill className="object-contain" />
+            </div>
             {buttons.map((button) => (
               <AuthNavButton
                 key={button.text}

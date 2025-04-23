@@ -24,10 +24,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/application/dashboard.js"
     ],
-    "/application/surveys/creatingsurvey": [
+    "/application/profile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/application/surveys/creatingsurvey.js"
+      "static/chunks/pages/application/profile.js"
     ],
     "/application/surveys/surveys": [
       "static/chunks/webpack.js",

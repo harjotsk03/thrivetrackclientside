@@ -11,7 +11,7 @@ export default function AuthTopBar() {
     const path = router.pathname.slice("/application/".length);
     return path.startsWith("surveys")
       ? "Surveys"
-      : ["dashboard", "employees"].includes(path)
+      : ["dashboard", "employees", "profile"].includes(path)
       ? path.charAt(0).toUpperCase() + path.slice(1)
       : "Home";
   })();

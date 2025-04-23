@@ -3,7 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/application/dashboard": "pages/application/dashboard.js",
-  "/application/surveys/creatingsurvey": "pages/application/surveys/creatingsurvey.js",
-  "/application/login": "pages/application/login.js",
+  "/application/profile": "pages/application/profile.js",
   "/application/surveys/surveys": "pages/application/surveys/surveys.js"
 }
